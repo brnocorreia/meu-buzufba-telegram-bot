@@ -1,52 +1,100 @@
-# Telegram Web Apps for Bots / Mini App Example
+# Meu BuzuFBA - Telegram Web App
 
-Example HTML-file that contains a plain-JS interaction with Telegram Web Apps API. 
-See live demo (with jQuery): [Attach Bot](https://t.me/asmico_attach_bot).
+A modern Telegram Web App that allows users to post updates about urban bus routes at the Federal University of Bahia (UFBA).
 
-## Links
-* Official docs: https://core.telegram.org/bots/webapps
-* Live Demo Bot: [Attach Bot](https://t.me/asmico_attach_bot)
-* Telegram Promo Bot: [Durger King](https://t.me/durgerkingbot)
+## Features
 
-## Quick setup
+- Post real-time updates about bus routes
+- Report bus status (on time, delayed, very delayed, not running)
+- Share current location of buses
+- Add comments with additional information
+- Seamless integration with Telegram
 
-#### 0. Optional: Host the Web App in GitHub Pages
+## Setup and Deployment
 
-The Web App must be hosted somewhere. Hosting it on a GitHub repository is a quick, free way to do it:
+### Prerequisites
 
-1. Create a repository (or fork this one)
-2. On the repository: Settings –> Pages:
-    - Source: Deploy from a branch
-    - Branch: master, / (root), Save
-3. Wait a few minutes for the web to be deployed. It will be available at: `https://{github-username}.github.io/{repository-name}/{location-inside-repository}`. In this case: `https://revenkroz.github.io/telegram-web-app-bot-example/index.html`
+- A Telegram Bot (created via [@BotFather](https://t.me/BotFather))
+- A web server or hosting service (GitHub Pages in this case)
+- Backend API for storing updates (optional but recommended)
 
-#### 1. Show the user a button to open a Web App. There are two ways:
+### Local Development
 
-1. Show the user a special menu button (near the message input field):
-   1. Go to [Bot Father](https://t.me/BotFather)
-   2. Select your bot
-   3. To set button in Bio: `Bot Settings` — `Configure Mini App`
-   4. Send a URL to your Web App (in this case, `https://revenkroz.github.io/telegram-web-app-bot-example/index.html`)
-   5. To set corner button in Bot: `Bot Settings` — `Menu Button` — `Specify..`/`Edit menu button URL`
-   6. Send a URL to your Web App (in this case, `https://revenkroz.github.io/telegram-web-app-bot-example/index.html`)
+1. Clone this repository:
 
-2. The second way is to send a button with the data that contains field `web_app` with a URL to a Web App:
-    ```json
-    {
-        "text": "Test web_app",
-        "web_app": {
-            "url": "https://revenkroz.github.io/telegram-web-app-bot-example/index.html"
-        }
-    }
-    ```
+   ```
+   git clone https://github.com/yourusername/meu-buzufba-telegram-bot.git
+   cd meu-buzufba-telegram-bot
+   ```
 
-#### 2. Add script to your Web App
+2. Open `index.html` in your browser to test the interface.
 
-To connect a Web App to the Telegram client, place the script `telegram-web-app.js` in the `<head>` tag before any other scripts, using this code ([more info](https://core.telegram.org/bots/webapps#initializing-web-apps)):
-```html
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-```
+3. For API integration, update the endpoint URL in the JavaScript code:
+   ```javascript
+   // Replace with your actual API endpoint
+   const response = await fetch("https://your-api-endpoint.com/bus-updates", {
+     // ...
+   });
+   ```
 
-Once the script is connected, a `window.Telegram.WebApp` object will become available.
+### Deploying to GitHub Pages
 
-#### 3. Do the thing!
+1. Push your code to a GitHub repository.
+
+2. Go to your repository settings, navigate to "Pages" and select the branch you want to deploy (usually `main` or `master`).
+
+3. GitHub will provide you with a URL where your app is deployed (e.g., `https://yourusername.github.io/meu-buzufba-telegram-bot/`).
+
+### Connecting to Telegram Bot
+
+1. Talk to [@BotFather](https://t.me/BotFather) on Telegram and use the `/mybots` command.
+
+2. Select your bot and then choose "Bot Settings" > "Menu Button" > "Configure Menu Button".
+
+3. Set the Web App URL to your GitHub Pages URL.
+
+4. Alternatively, you can create a command that opens the Web App:
+
+   ```
+   /setcommands
+   ```
+
+   Then add:
+
+   ```
+   atualizar - Enviar atualização sobre o ônibus
+   ```
+
+5. To configure the command to open the Web App, use:
+   ```
+   /setmenubutton
+   ```
+   And provide your GitHub Pages URL.
+
+## Backend Integration
+
+For a complete solution, you'll need a backend API to store and retrieve bus updates. You can create a simple API using:
+
+- Node.js with Express
+- Python with Flask or FastAPI
+- Firebase Functions
+- Any other backend technology
+
+The API should have at least one endpoint to receive POST requests with the update data.
+
+## Customization
+
+You can customize the app by:
+
+- Updating the bus routes in the select dropdown
+- Changing the color scheme (the app automatically adapts to Telegram's theme)
+- Adding more fields to the form
+- Implementing real-time updates using WebSockets
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
